@@ -1,56 +1,67 @@
-import { Link,useNavigate } from "react-router-dom"
-import Footer from "../componetes/Footer"
-import { useContext,useState } from "react"
-import axios from 'axios'
-import {URL} from '../url'
-import { UserContext } from "../context/UserContext"
+import { Link, useNavigate } from "react-router-dom";
+import Footer from "../componetes/Footer";
+import { useContext, useState } from "react";
+import axios from "axios";
+import { URL } from "../url";
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
-    const [email,setEmail]=useState("")
-    const [password,setPassword]=useState("")
-    const [error,setError]=useState(false)
-    const {setUser} = useContext(UserContext)
-    const navigate=useNavigate()
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
+  const { setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
-    const handleLogin=async ()=>{
-      try{
-        const res=await axios.post(URL+"/api/auth/login",{email,password},{withCredentials:true})
-        //console.log(res.data)
-        setUser(res.data)  
-        navigate("/")
-        
-      }
-      catch(err){
-        setError(true)
-        console.log(err)
-      }
-  
+  const handleLogin = async () => {
+    try {
+      const res = await axios.post(URL + "/api/auth/login", { email, password }, { withCredentials: true });
+      setUser(res.data);
+      navigate("/");
+    } catch (err) {
+      setError(true);
+      console.log(err);
     }
+  };
 
   return (
-    <>
-      <div className="flex items-center justify-between px-6 md:px-[200px] py-4">
-       <h1 className="text-lg md:text-xl font-extrabold"><Link to ="/">Find Your Losted Things</Link></h1>
-       <h3><Link to ="/Register">Register</Link></h3>
-      </div>
-      <div className="w-full flex justify-center items-center h-[70vh]">
-        <div className="flex flex-col justify-center items-center space-y-4 w-[80%] md:w-[25%]">
-          <h1 className="text-xl font-bold text-left">Log in to account</h1>
-          <input onChange={(e)=>setEmail(e.target.value)} className="w-full px-4 py-2 border-2 border-black outline-0" type="text" placeholder="Enter your Email"/>
-          <input onChange={(e)=>setPassword(e.target.value)} className="w-full px-4 py-2 border-2 border-black outline-0" type="password" placeholder="Enter your Password"/>
-          <button  onClick={handleLogin} className="w-full px-4 py-4 text-lg font-bold text-white bg-black rounded-lg
-            hover:bg-gray-500 hover:text-black">Login</button>
-            {error && <h3 className="text-red-500 text-sm ">Something went wrong</h3>}
-          <div className="flex justify-center items-center space-x-3">
+    <div className="flex flex-col h-screen bg-gray-100">
+      <header className="p-4  flex justify-between items-center bg-gradient-to-r from-blue-500 to-purple-500">
+        <h1 className="text-lg md:text-3xl pl-20 font-extrabold">
+          <Link to="/">Find Your Lost Things</Link>
+        </h1>
+        <Link to="/register" className="text-white pr-20 hover:underline">Register</Link>
+      </header>
+      <main className="flex-1 flex justify-center items-center">
+        <div className="w-full md:w-1/3 p-4 bg-white shadow-md rounded-lg">
+          <h1 className="text-2xl font-bold mb-4">Log in to your account</h1>
+          <input
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 mb-3 border rounded-lg focus:outline-none"
+            type="text"
+            placeholder="Enter your Email"
+          />
+          <input
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-2 mb-3 border rounded-lg focus:outline-none"
+            type="password"
+            placeholder="Enter your Password"
+          />
+          <button
+            onClick={handleLogin}
+            className="w-full px-4 py-2 text-lg font-bold text-white bg-blue-500 rounded-lg hover:bg-blue-600"
+          >
+            Login
+          </button>
+          {error && <p className="text-red-500 text-sm mt-2">Something went wrong</p>}
+          <div className="justify-center flex mt-4">
             <p>New here?</p>
-            <p className="text-gray-500 hover:text-black"><Link to="/register">Register</Link></p>
-
+            <Link to="/register" className="ml-2 text-blue-500 hover:underline">Register</Link>
           </div>
         </div>
-      </div>
-      <Footer/>
-    </>
-  )
-}
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
-export default Login
+export default Login;
