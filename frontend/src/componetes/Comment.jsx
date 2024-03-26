@@ -28,7 +28,7 @@ const Comment = ({c,post}) => {
             <div className="flex justify-center items-center space-x-4">
             <p>{new Date(c.updatedAt).toString().slice(0,15)}</p>
             <p>{new Date(c.updatedAt).toString().slice(16,24)}</p>
-            {user?._id===c?.userId ?
+            {user?._id===c?.userId?
               <div className="flex items-center justify-center space-x-2">
                     <p className="cursor-pointer" onClick={()=>deleteComment(c._id)}><MdDelete/></p>
                 </div>:""}
@@ -41,4 +41,4 @@ const Comment = ({c,post}) => {
   )
 }
 
-export default Comment 
+export default Comment

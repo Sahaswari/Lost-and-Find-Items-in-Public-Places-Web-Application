@@ -32,7 +32,7 @@ router.put("/:id",verifyToken,async(req,res)=>{
 //DELETE
 router.delete("/:id",verifyToken,async(req,res)=>{
   try {
-    await Comment.findOneAndDelete(req.params.id)
+    await Comment.findByIdAndDelete(req.params.id)
     
     res.status(200).json("Comment has been deleted ")
   }

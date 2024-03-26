@@ -16,7 +16,7 @@ const Login = () => {
     try {
       const res = await axios.post(URL + "/api/auth/login", { email, password }, { withCredentials: true });
       setUser(res.data);
-      navigate("/");
+      navigate("/Electronic");
     } catch (err) {
       setError(true);
       console.log(err);

@@ -2,10 +2,10 @@ import { IF } from "../url";
 
 const HomePostElectronic = ({ post }) => {
   return (
-    <div className="w-full flex mt-8 space-x-4 bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="w-full h-[300px] flex mt-8 space-x-4 bg-white shadow-lg rounded-lg overflow-hidden">
       {/* Left */}
       <div className="w-[35%] relative">
-        <img src={IF + post.photo} alt={post.title} className="w-full h-auto" />
+        <img src={IF + post.photo} alt={post.title} className="w-[100%] h-[100%]" />
         <div className="absolute top-0 right-0 bg-blue-500 text-white px-3 py-2 rounded-bl-lg text-sm">
           New
         </div>
